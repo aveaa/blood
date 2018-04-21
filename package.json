@@ -1,0 +1,14 @@
+{
+  "name": "visual",
+  "version": "1.0.0",
+  "description": "A just Discord bot. hehe",
+  "main": "visual.js",
+  "scripts": {
+    "start": "node visual.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.2.0"
+  },
+  "author": "TheDipperProduction",
+  "license": "GPL-3.0"
+}
