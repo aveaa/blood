@@ -45,12 +45,16 @@ if (err) return message.reply("у вас нету разрешения для у
         message.author.send({embed: {
     color: 2378990,
     fields: [{
-        name: "!kick [@упоминание] [причина] - кикнуть пользователя",
+        name: "!kick [@упоминание] [причина]",
         value: "Кикнуть пользователя"
       },
       {
-        name: "!ban [@упоминание] [причина] - забанить пользователя",
+        name: "!ban [@упоминание] [причина]",
         value: "Забанить пользователя"
+      },
+      {
+        name: "!chgasschat [@упоминание] [причина]",
+        value: "Сменить доступ к чату для пользователя"
       }
     ]
   }
@@ -87,6 +91,40 @@ if (err) return message.reply("у вас нету разрешения кика�
     ]
   }
 });
+}
+    
+    if(command === "chgasschat") {
+	    let err = false;
+['MANAGE_MESSAGES'].forEach(function (item) {
+            if (!message.member.hasPermission(item, false, true, true)) {
+                err = true;
+            }
+        });
+if (err) return message.reply("у вас нету разрешения для управления сообщениями (MANAGE_MESSAGES).");
+		let reason = args.slice(1).join(' ');
+  		let member = message.mentions.members.first();
+  		let muteRole = message.guild.roles.find('name', 'Muted');;
+  		if (!muteRole) return message.reply('Я не могу найти роль Muted').catch(console.error);
+  		if (reason.length < 1) return message.reply('причина, -__-').catch(console.error);
+  		if (message.mentions.users.size < 1) return message.reply('упоминание, -__-').catch(console.error);
+  		const embed = new Discord.RichEmbed()
+    		.setColor(0x00AE86)
+    		.setTimestamp()
+    		.setDescription(`**Действие:** Мут/Размут\n**Нарушитель:** ${member.user.tag}\n**Модератор:** ${message.author.tag}\n**Причина:** ${reason}`);
+
+  		if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply('У меня нету прав MANAGE_ROLES').catch(console.error);
+
+  		if (member.roles.has(muteRole.id)) {
+    		member.removeRole(muteRole).then(() => {
+      		message.channel.send({embed}).catch(console.error);
+    		})
+    		.catch(e=>console.error("Невозможно размутить: " + e));
+  		} else {
+   	 		member.addRole(muteRole).then(() => {
+      		message.channel.send({embed}).catch(console.error);
+    		})
+    		.catch(e=>console.error("Невозможно выдать мут: " + e));
+  		}
 }
  
   if(command === "ban") {
