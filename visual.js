@@ -31,13 +31,25 @@ client.on('message', async message => {
     if(message.author.bot) return;
     
     if(message.content === prefix + "about") {
-    	message.channel.send(`Команды модератора: ${prefix}moderator\nИсходный код: https://github.com/thedipperproduction/visual`);
+    	message.channel.send(`Аватарка: ${prefix}avatar [упоминание]\nКоманды модератора: ${prefix}moderator\nИсходный код: https://github.com/thedipperproduction/visual`);
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+	
+	if(command === "avatar") {
+		let member = message.mentions.members.first();
+        if (!member)
+            return message.channel.send({error});
+            const embed = new Discord.RichEmbed()
+                .setTitle(`Аватарка пользователя ${member.user.tag}`)
+                .setImage(member.user.avatarURL)
+                .setFooter(client.user.tag)
+                .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
+            message.channel.send({embed});
+}
     
     if(command === "moderator") {
     let err = false;
@@ -60,6 +72,10 @@ if (err) return message.reply("у вас нету разрешения для у
       {
         name: "!chgasschat [@упоминание] [причина]",
         value: "Сменить доступ к чату для пользователя"
+      },
+      {
+        name: "!setmod [@упоминание]",
+        value: "Поставить/снять пользователя на пост модератора"
       }
     ]
   }
@@ -129,6 +145,35 @@ if (err) return message.reply("у вас нету разрешения для у
       		message.channel.send({embed}).catch(console.error);
     		})
     		.catch(e=>console.error("Невозможно выдать мут: " + e));
+  		}
+}
+	
+	if(command === "setmod") {
+	    let err = false;
+['ADMINISTRATOR'].forEach(function (item) {
+            if (!message.member.hasPermission(item, false, true, true)) {
+                err = true;
+            }
+        });
+if (err) return message.reply("у вас нету прав администратора.");
+		let reason = args.slice(1).join(' ');
+  		let member = message.mentions.members.first();
+  		let muteRole = message.guild.roles.find('name', 'Moder (Офицер гильдии)');;
+  		if (!muteRole) return message.reply('Я не могу найти роль Moder (Офицер гильдии)').catch(console.error);
+  		if (message.mentions.users.size < 1) return message.reply('упоминание, -__-').catch(console.error);
+  		const embed = new Discord.RichEmbed()
+    		.setColor(0x00AE86)
+    		.setTimestamp()
+    		.setDescription(`**Действие:** Установка на пост модератора\n**Упомянутый:** ${member.user.tag}\n**Поставил:** ${message.author.tag}`);
+
+  		if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply('У меня нету прав MANAGE_ROLES').catch(console.error);
+
+  		if (member.roles.has(muteRole.id)) {
+    		member.removeRole(muteRole).then(() => {
+   	 		member.addRole(muteRole).then(() => {
+      		message.channel.send({embed}).catch(console.error);
+    		})
+    		.catch(e=>console.error("Невозможно выдать роль: " + e));
   		}
 }
  
