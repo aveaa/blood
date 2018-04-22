@@ -42,17 +42,7 @@ client.on('message', async message => {
   const command = args.shift().toLowerCase();
 	
 	if(command === "license") {
-		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\n
-Для связи с автором можете использовать данные реквизиты:\n
-Discord: **Eclipse#5372**\n
-EMail: **contact@eclipsedev.cf**\n\n
-Бот настроен специально для сервера гильдии Andromeda в Discord.\n
-Ссылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\n
-Исходный код: **https://github.com/thedipperproduction/visual-for-andromeda_clan**\n\n
-Copyright 2018 © Eclipse Studio. Все права защищены.\n
-Нарушение авторских прав преследуется законом.\n\n
-CC-BY-NC-SA\n
-http://creativecommons.org/licenses/by-nc-sa/4.0/`);
+		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\nДля связи с автором можете использовать данные реквизиты:\nDiscord: **Eclipse#5372**\nEMail: **contact@eclipsedev.cf**\n\nБот настроен специально для сервера гильдии Andromeda в Discord.\nСсылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\nИсходный код: **https://github.com/thedipperproduction/visual-for-andromeda_clan**\n\nCopyright 2018 © Eclipse Studio. Все права защищены.\nНарушение авторских прав преследуется законом.\n\nCC-BY-NC-SA:\nhttp://creativecommons.org/licenses/by-nc-sa/4.0`);
 		message.reply(`проверьте свои личные сообщения.`);
 	}
 	
