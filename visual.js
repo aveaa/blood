@@ -31,7 +31,7 @@ client.on('message', async message => {
     if(message.author.bot) return;
     
     if(message.content === prefix + "about") {
-    	message.channel.send("```fix\nШутки: ${prefix}joke\nАватарка: ${prefix}avatar [упоминание]\nКоманды модератора: ${prefix}moderator\nАвторские права: ${prefix}license\n```");
+    	message.channel.send("```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nАвторские права: !license\n```");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
