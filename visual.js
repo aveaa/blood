@@ -31,13 +31,28 @@ client.on('message', async message => {
     if(message.author.bot) return;
     
     if(message.content === prefix + "about") {
-    	message.channel.send(`Шутки: ${prefix}joke\nАватарка: ${prefix}avatar [упоминание]\nКоманды модератора: ${prefix}moderator\nИсходный код: https://github.com/thedipperproduction/visual`);
+    	message.channel.send(`Шутки: ${prefix}joke\nАватарка: ${prefix}avatar [упоминание]\nКоманды модератора: ${prefix}moderator\nАвторские права: ${prefix}license`);
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+	
+	if(command === "license") {
+		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\n
+Для связи с автором можете использовать данные реквизиты:\n
+Discord: **Eclipse#5372**\n
+EMail: **contact@eclipsedev.cf**\n\n
+Бот настроен специально для сервера гильдии Andromeda в Discord.\n
+Ссылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\n
+Исходный код: **https://github.com/thedipperproduction/visual-for-andromeda_clan**\n\n
+Copyright 2018 © Eclipse Studio. Все права защищены.\n
+Нарушение авторских прав преследуется законом.\n\n
+CC-BY-NC-SA\n
+http://creativecommons.org/licenses/by-nc-sa/4.0/`);
+		message.reply(`проверьте свои личные сообщения.`);
+	}
 	
 	if(command === "eval") {
     if(message.author.id !== "178404926869733376") return;
