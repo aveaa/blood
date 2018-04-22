@@ -11,7 +11,7 @@ client.login(token);
 
 // Приветствуем людей
 client.on('guildMemberAdd', async message => {
-	client.channels.get("435798157251706880").send(`Возьмите с собой ${message.user.tag} на турнир`);
+	client.channels.get("435798157251706880").send(`Возьмите с собой <@${message.user.id}> на турнир`);
 });
 
 // Сообщение о готовности (вывод в консоль)
