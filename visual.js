@@ -1,5 +1,3 @@
-// hmmm
-
 // Запуск
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -33,7 +31,7 @@ client.on('message', async message => {
     if(message.author.bot) return;
     
     if(message.content === prefix + "about") {
-    	message.channel.send(`Шутки: ${prefix}joke\nАватарка: ${prefix}avatar [упоминание]\nКоманды модератора: ${prefix}moderator\nАвторские права: ${prefix}license`);
+    	message.channel.send("```fix\nШутки: ${prefix}joke\nАватарка: ${prefix}avatar [упоминание]\nКоманды модератора: ${prefix}moderator\nАвторские права: ${prefix}license\n```");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
