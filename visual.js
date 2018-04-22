@@ -9,6 +9,11 @@ var prefix = '!';
 // Подключаемся
 client.login(token);
 
+// Приветствуем людей
+client.on('guildMemberAdd', async message => {
+	client.channels.get("435798157251706880").send(`Возьмите с собой ${message.user.tag} на турнир`);
+});
+
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
     // Статус "не беспокоить"
