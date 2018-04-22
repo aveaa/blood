@@ -13,8 +13,13 @@ client.login(token);
 client.on('ready', () => {
     // Статус "не беспокоить"
     client.user.setStatus('dnd');
-    // Играет в Куличики
-    client.user.setGame('Minecraft');
+    // Смотрит на Француза
+	client.user.setPresence({
+				game: {
+					name: `на Француза | !about`,
+					type: 3
+				}
+});
     // Вывод текста "что бот готов" + токен бота в консоль
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
     console.log('Токен: ' + token)
