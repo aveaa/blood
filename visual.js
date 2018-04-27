@@ -21,7 +21,7 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `!about`,
+					name: `на тебя`,
 					type: 3
 				}
 });
@@ -47,6 +47,17 @@ client.on('message', async message => {
 	if(command === "license") {
 		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\nДля связи с автором можете использовать данные реквизиты:\nDiscord: **Eclipse#5372**\nEMail: **contact@eclipsedev.cf**\n\nБот настроен специально для сервера гильдии Andromeda в Discord.\nСсылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\nИсходный код: **https://github.com/thedipperproduction/andromeda**\n\nCopyright 2018 © Eclipse Studio. Все права защищены.\nНарушение авторских прав преследуется законом.\n\nCC-BY-NC-SA:\n**http://creativecommons.org/licenses/by-nc-sa/4.0**`);
 		message.reply(`проверьте свои личные сообщения.`);
+	}
+	
+	if(command === "uptime") {
+		const embed = new Discord.RichEmbed()
+            .setTitle('**Статистика:**')
+            .setThumbnail(client.user.avatarURL);
+            embed.addField('Пинг:', client.ping);
+            embed.addField('ОЗУ:', process.env.WEB_MEMORY + 'MB / ' + process.env.MEMORY_AVAILABLE + 'MB');
+            embed.addField('Сервер:', process.env.DYNO);
+            embed.addField('Порт:', process.env.PORT);
+            message.channel.send(embed);
 	}
 	
 	if(command === "eval") {
@@ -164,14 +175,16 @@ client.on('message', async message => {
 }
 	
 	if(command === "avatar") {
-		let member = message.mentions.members.first();
 		const embed1 = new Discord.RichEmbed()
                 .setTitle(`Аватарка пользователя ${message.author.tag}`)
                 .setImage(message.author.avatarURL)
                 .setFooter(client.user.tag)
                 .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
+		
+		let member = message.mentions.members.first();
         if (!member)
             return message.channel.send({embed1});
+		
             const embed2 = new Discord.RichEmbed()
                 .setTitle(`Аватарка пользователя ${member.user.tag}`)
                 .setImage(member.user.avatarURL)
