@@ -21,8 +21,8 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `Оксси | !about`,
-					type: 2
+					name: `!about`,
+					type: 3
 				}
 });
     // Вывод текста "что бот готов" + токен бота в консоль
