@@ -30,12 +30,6 @@ client.on('ready', () => {
     console.log('Токен: ' + token)
 });
 
-// Сообщение об ошибке
-const error = new Discord.RichEmbed()
-                .setTitle(`Произошла ошибка`)
-                .setFooter(client.user.tag)
-                .setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
-
 // Сообщения
 client.on('message', async message => {
     // Если сообщение отправил бот, молчим
@@ -57,6 +51,11 @@ client.on('message', async message => {
 	
 	if(command === "eval") {
     if(message.author.id !== "178404926869733376") return message.reply(`вы не разработчик этого бота`);
+		// Сообщение об ошибке
+const error = new Discord.RichEmbed()
+                .setTitle(`Произошла ошибка`)
+                .setFooter(client.user.tag)
+.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
     try {
       var code = args.join(" ");
 	    if(!code) return message.channel.send({error});
@@ -172,6 +171,11 @@ client.on('message', async message => {
 	
 	if(command === "avatar") {
 		let member = message.mentions.members.first();
+		// Сообщение об ошибке
+const error = new Discord.RichEmbed()
+                .setTitle(`Произошла ошибка`)
+                .setFooter(client.user.tag)
+.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
         if (!member)
             return message.channel.send({error});
             const embed = new Discord.RichEmbed()
@@ -220,6 +224,11 @@ if (err) return message.reply("у вас нету разрешения для у
             }
         });
 if (err) return message.reply("у вас нету разрешения кикать участников (KICK_MEMBERS).");
+	  // Сообщение об ошибке
+const error = new Discord.RichEmbed()
+                .setTitle(`Произошла ошибка`)
+                .setFooter(client.user.tag)
+.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
     let member = message.mentions.members.first();
     if(!member)
       return message.reply("вы не сказали кого кикнуть");
@@ -283,6 +292,11 @@ if (err) return message.reply("у вас нету разрешения для у
             }
         });
 if (err) return message.reply("у вас нету разрешения банить участников (BAN_MEMBERS).");
+	  // Сообщение об ошибке
+const error = new Discord.RichEmbed()
+                .setTitle(`Произошла ошибка`)
+                .setFooter(client.user.tag)
+.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
      
     let member = message.mentions.members.first();
     if(!member)
