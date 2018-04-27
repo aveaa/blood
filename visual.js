@@ -21,7 +21,7 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `на тебя`,
+					name: `на твою мамашу`,
 					type: 3
 				}
 });
@@ -175,22 +175,16 @@ client.on('message', async message => {
 }
 	
 	if(command === "avatar") {
-		const embed1 = new Discord.RichEmbed()
-                .setTitle(`Аватарка пользователя ${message.author.tag}`)
-                .setImage(message.author.avatarURL)
-                .setFooter(client.user.tag)
-                .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
-		
 		let member = message.mentions.members.first();
         if (!member)
-            return message.channel.send({embed1});
+            return message.channel.send(`fail`);
 		
-            const embed2 = new Discord.RichEmbed()
+            const embed = new Discord.RichEmbed()
                 .setTitle(`Аватарка пользователя ${member.user.tag}`)
                 .setImage(member.user.avatarURL)
                 .setFooter(client.user.tag)
                 .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
-            message.channel.send({embed2});
+            message.channel.send({embed});
 }
     
     if(command === "moderator") {
