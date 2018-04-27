@@ -21,7 +21,7 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `тебя | !about`,
+					name: `Оксси | !about`,
 					type: 2
 				}
 });
@@ -29,6 +29,12 @@ client.on('ready', () => {
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
     console.log('Токен: ' + token)
 });
+
+// Сообщение об ошибке
+const error = new Discord.RichEmbed()
+                .setTitle(`Произошла ошибка`)
+                .setFooter(client.user.tag)
+                .setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
 
 // Сообщения
 client.on('message', async message => {
@@ -43,11 +49,6 @@ client.on('message', async message => {
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-	
-	const error = new Discord.RichEmbed()
-                .setTitle(`Произошла ошибка`)
-                .setFooter(client.user.tag)
-                .setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
 	
 	if(command === "license") {
 		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\nДля связи с автором можете использовать данные реквизиты:\nDiscord: **Eclipse#5372**\nEMail: **contact@eclipsedev.cf**\n\nБот настроен специально для сервера гильдии Andromeda в Discord.\nСсылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\nИсходный код: **https://github.com/thedipperproduction/andromeda**\n\nCopyright 2018 © Eclipse Studio. Все права защищены.\nНарушение авторских прав преследуется законом.\n\nCC-BY-NC-SA:\n**http://creativecommons.org/licenses/by-nc-sa/4.0**`);
