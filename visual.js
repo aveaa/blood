@@ -44,15 +44,21 @@ client.on('message', async message => {
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 	
+	const error = new Discord.RichEmbed()
+                .setTitle(`Произошла ошибка`)
+                .setFooter(client.user.tag)
+                .setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
+	
 	if(command === "license") {
 		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\nДля связи с автором можете использовать данные реквизиты:\nDiscord: **Eclipse#5372**\nEMail: **contact@eclipsedev.cf**\n\nБот настроен специально для сервера гильдии Andromeda в Discord.\nСсылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\nИсходный код: **https://github.com/thedipperproduction/andromeda**\n\nCopyright 2018 © Eclipse Studio. Все права защищены.\nНарушение авторских прав преследуется законом.\n\nCC-BY-NC-SA:\n**http://creativecommons.org/licenses/by-nc-sa/4.0**`);
 		message.reply(`проверьте свои личные сообщения.`);
 	}
 	
 	if(command === "eval") {
-    if(message.author.id !== "178404926869733376") return;
+    if(message.author.id !== "178404926869733376") return message.reply(`вы не разработчик этого бота`);
     try {
       var code = args.join(" ");
+	    if(!code) return message.channel.send({error});
       var evaled = eval(code);
 
       if (typeof evaled !== "string")
@@ -222,7 +228,7 @@ if (err) return message.reply("у вас нету разрешения кика�
     if(!reason)
       return message.reply("а причину написать?");
     await member.kick(reason)
-      .catch(error => message.reply(`Прости, я не могу кикнуть: ${error}`));
+      .catch(error => message.channel.send({error}));
     message.channel.send({embed: {
     color: 3447003,
     fields: [{
@@ -288,7 +294,7 @@ if (err) return message.reply("у вас нету разрешения бани�
       return message.reply("а причину написать?");
      
     await member.ban(reason)
-      .catch(error => message.reply(`прости, я не могу забанить: ${error}`));
+      .catch(error => message.channel.send({error}));
     message.channel.send({embed: {
     color: 3447003,
     fields: [{
@@ -299,22 +305,4 @@ if (err) return message.reply("у вас нету разрешения бани�
   }
 });
 }
- 
-  if(command === "eval") {
-        if (message.author.id !== "178404926869733376") return message.channel.send({embed: {
-  color: 3447003,
-  description: "`Вы не разработчик бота. Чтобы получить доступ к этой команде, обратитесь к <@178404926869733376>`"
-}});
-    try {
-      var code = args.join(" ");
-      var evaled = eval(code);
- 
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
- 
-      message.channel.sendCode("xl", clean(evaled));
-    } catch(err) {
-      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-}
-    }
 });
