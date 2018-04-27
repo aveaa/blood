@@ -51,14 +51,8 @@ client.on('message', async message => {
 	
 	if(command === "eval") {
     if(message.author.id !== "178404926869733376") return message.reply(`вы не разработчик этого бота`);
-		// Сообщение об ошибке
-const error = new Discord.RichEmbed()
-                .setTitle(`Произошла ошибка`)
-                .setFooter(client.user.tag)
-.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
     try {
       var code = args.join(" ");
-	    if(!code) return message.channel.send({error});
       var evaled = eval(code);
 
       if (typeof evaled !== "string")
@@ -171,19 +165,19 @@ const error = new Discord.RichEmbed()
 	
 	if(command === "avatar") {
 		let member = message.mentions.members.first();
-		// Сообщение об ошибке
-const error = new Discord.RichEmbed()
-                .setTitle(`Произошла ошибка`)
+		const embed1 = new Discord.RichEmbed()
+                .setTitle(`Аватарка пользователя ${message.author.tag}`)
+                .setImage(message.author.avatarURL)
                 .setFooter(client.user.tag)
-.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
+                .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
         if (!member)
-            return message.channel.send({error});
-            const embed = new Discord.RichEmbed()
+            return message.channel.send({embed1});
+            const embed2 = new Discord.RichEmbed()
                 .setTitle(`Аватарка пользователя ${member.user.tag}`)
                 .setImage(member.user.avatarURL)
                 .setFooter(client.user.tag)
                 .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
-            message.channel.send({embed});
+            message.channel.send({embed2});
 }
     
     if(command === "moderator") {
@@ -224,11 +218,6 @@ if (err) return message.reply("у вас нету разрешения для у
             }
         });
 if (err) return message.reply("у вас нету разрешения кикать участников (KICK_MEMBERS).");
-	  // Сообщение об ошибке
-const error = new Discord.RichEmbed()
-                .setTitle(`Произошла ошибка`)
-                .setFooter(client.user.tag)
-.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
     let member = message.mentions.members.first();
     if(!member)
       return message.reply("вы не сказали кого кикнуть");
@@ -238,7 +227,7 @@ const error = new Discord.RichEmbed()
     if(!reason)
       return message.reply("а причину написать?");
     await member.kick(reason)
-      .catch(error => message.channel.send({error}));
+      .catch(error => message.channel.send('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>'));
     message.channel.send({embed: {
     color: 3447003,
     fields: [{
@@ -292,11 +281,6 @@ if (err) return message.reply("у вас нету разрешения для у
             }
         });
 if (err) return message.reply("у вас нету разрешения банить участников (BAN_MEMBERS).");
-	  // Сообщение об ошибке
-const error = new Discord.RichEmbed()
-                .setTitle(`Произошла ошибка`)
-                .setFooter(client.user.tag)
-.setDescription('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>');
      
     let member = message.mentions.members.first();
     if(!member)
@@ -309,7 +293,7 @@ const error = new Discord.RichEmbed()
       return message.reply("а причину написать?");
      
     await member.ban(reason)
-      .catch(error => message.channel.send({error}));
+      .catch(error => message.channel.send('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>'));
     message.channel.send({embed: {
     color: 3447003,
     fields: [{
