@@ -52,8 +52,20 @@ client.on('message', async message => {
 		message.reply(`проверьте свои личные сообщения.`);
 	}
 	
-	if(command === "rs_chat") {
-		if(message.author.id !== ['240167492931158022', '275249724251176961']) return message.channel.send({embed: {
+	if(command === "dimosha_chat") {
+		if(message.author.id !== '275249724251176961') return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
+		
+		const sayMessage = args.join(" ");
+		
+		client.channels.get("434650030771666945").send(sayMessage);
+	}
+	
+	if(command === "render_chat") {
+		if(message.author.id !== '240167492931158022') return message.channel.send({embed: {
   color: 1111111,
   title: "Ошибка:",
   description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
