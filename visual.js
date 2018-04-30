@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 // Подключаем токен и префикс
 var token = process.env.BOTTOKEN
-var prefix = '!';
+var prefix = '-';
 
 // Подключаемся
 client.login(token);
@@ -21,7 +21,7 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `на Француза`,
+					name: `на Француза . -help`,
 					type: 3
 				}
 });
@@ -53,7 +53,7 @@ client.on('message', async message => {
 	}
 	
 	if(command === "rs_chat") {
-		if(message.author.id !== "240167492931158022") return message.channel.send({embed: {
+		if(message.author.id !== ['240167492931158022', '275249724251176961']) return message.channel.send({embed: {
   color: 1111111,
   title: "Ошибка:",
   description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
