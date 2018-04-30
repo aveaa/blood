@@ -32,6 +32,9 @@ client.on('ready', () => {
 
 // Сообщения
 client.on('message', async message => {
+	
+	const ayy = client.emojis.find("name", "error");
+	
     // Если сообщение отправил бот, молчим
     if(message.author.bot) return;
     
@@ -49,6 +52,17 @@ client.on('message', async message => {
 		message.reply(`проверьте свои личные сообщения.`);
 	}
 	
+	if(command === "rs_chat") {
+		if(message.author.id === render) return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
+		
+		const sayMessage = args.join(" ");
+		
+		client.channels.get("434650030771666945").send(sayMessage);
+	
 	if(command === "uptime") {
 		const embed = new Discord.RichEmbed()
             .setTitle('**Статистика:**')
@@ -61,7 +75,11 @@ client.on('message', async message => {
 	}
 	
 	if(command === "eval") {
-    if(message.author.id !== "178404926869733376") return message.reply(`вы не разработчик этого бота`);
+    if(message.author.id !== "178404926869733376") return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
     try {
       var code = args.join(" ");
       var evaled = eval(code);
