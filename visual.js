@@ -62,6 +62,7 @@ client.on('message', async message => {
 		const sayMessage = args.join(" ");
 		
 		client.channels.get("434650030771666945").send(sayMessage);
+	}
 	
 	if(command === "uptime") {
 		const embed = new Discord.RichEmbed()
