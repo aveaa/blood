@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 // Подключаем токен и префикс
 var token = process.env.BOTTOKEN
-var prefix = '-';
+var prefix = '!';
 
 // Подключаемся
 client.login(token);
@@ -21,7 +21,7 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `на Француза / -help`,
+					name: `на Француза / !help`,
 					type: 3
 				}
 });
