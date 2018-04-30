@@ -6,6 +6,8 @@ const client = new Discord.Client();
 var token = process.env.BOTTOKEN
 var prefix = '!';
 
+var render = '240167492931158022';
+
 // Подключаемся
 client.login(token);
 
