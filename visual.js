@@ -21,7 +21,7 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `на Француза . -help`,
+					name: `на Француза / -help`,
 					type: 3
 				}
 });
