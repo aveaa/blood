@@ -35,8 +35,6 @@ client.on('message', async message => {
 	
 	const ayy = client.emojis.find("name", "error");
 	
-    // Если сообщение отправил бот, молчим
-    if(message.author.bot) return;
     
     if(message.content === prefix + "about") {
     	message.channel.send("```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nАвторские права: !license\n```");
