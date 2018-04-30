@@ -36,7 +36,7 @@ client.on('message', async message => {
 	const ayy = client.emojis.find("name", "error");
 	
     
-    if(message.content === prefix + "about") {
+    if(message.content === prefix + "help") {
     	message.channel.send("Йоувич, меня зовут Andromeda! <@178404926869733376> создал меня, по просьбе <@240167492931158022>. Кстати, вот мои команды:```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nАвторские права: !license\n```Если нужна помощь, напиши Eclipse#5372 или зайди на его сервер, где он тебе поможет: https://discord.gg/dGVdPyk");
     }
     
