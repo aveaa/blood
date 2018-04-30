@@ -223,7 +223,11 @@ client.on('message', async message => {
                 err = true;
             }
         });
-if (err) return message.reply("у вас нету разрешения для управления сообщениями (MANAGE_MESSAGES).");
+if (err) return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
         message.author.send({embed: {
     color: 2378990,
     fields: [{
@@ -253,7 +257,11 @@ if (err) return message.reply("у вас нету разрешения для у
                 err = true;
             }
         });
-if (err) return message.reply("у вас нету разрешения кикать участников (KICK_MEMBERS).");
+if (err) return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
     let member = message.mentions.members.first();
     if(!member)
       return message.reply("вы не сказали кого кикнуть");
@@ -282,7 +290,11 @@ if (err) return message.reply("у вас нету разрешения кика�
                 err = true;
             }
         });
-if (err) return message.reply("у вас нету разрешения для управления сообщениями (MANAGE_MESSAGES).");
+if (err) return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
 		let reason = args.slice(1).join(' ');
   		let member = message.mentions.members.first();
   		let muteRole = message.guild.roles.find('name', 'Muted');;
@@ -316,7 +328,11 @@ if (err) return message.reply("у вас нету разрешения для у
                 err = true;
             }
         });
-if (err) return message.reply("у вас нету разрешения банить участников (BAN_MEMBERS).");
+if (err) return message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
+}});
      
     let member = message.mentions.members.first();
     if(!member)
