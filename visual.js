@@ -6,9 +6,6 @@ const client = new Discord.Client();
 var token = process.env.BOTTOKEN
 var prefix = '!';
 
-// Подключаемся
-client.login(token);
-
 // Приветствуем людей
 client.on('guildMemberAdd', message => {
 	client.channels.get("435798157251706880").send(`Возьмите с собой <@${message.user.id}> на турнир`);
@@ -21,8 +18,8 @@ client.on('ready', () => {
     // Смотрит на Француза
 	client.user.setPresence({
 				game: {
-					name: `на Француза / !help`,
-					type: 3
+					name: `VimeWorld.ru`,
+					type: 1
 				}
 });
     // Вывод текста "что бот готов" + токен бота в консоль
@@ -37,18 +34,14 @@ client.on('message', async message => {
 	
     
     if(message.content === prefix + "help") {
-    	message.channel.send("Йоувич, меня зовут Andromeda! <@178404926869733376> создал меня, по просьбе <@240167492931158022>. Кстати, вот мои команды:```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nАвторские права: !license\n```Если нужна помощь, напиши Eclipse#5372 или зайди на его сервер, где он тебе поможет: https://discord.gg/dGVdPyk");
+	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    	message.reply("вам доступны следующие команды:```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-	
-	if(command === "license") {
-		message.author.send(`Использование этого кода в полной мере или частично позволяется только на некоммерческих основаниях после разрешения автора.\nДля связи с автором можете использовать данные реквизиты:\nDiscord: **Eclipse#5372**\nEMail: **contact@eclipsedev.cf**\n\nБот настроен специально для сервера гильдии Andromeda в Discord.\nСсылка-приглашение на сервер: **https://discord.gg/6Xr6fNK**\nИсходный код: **https://github.com/EclipseHub/andromeda**\n\nCopyright 2018 © Eclipse Studio. Все права защищены.\nНарушение авторских прав преследуется законом.\n\nCC-BY-NC-SA:\n**http://creativecommons.org/licenses/by-nc-sa/4.0**`);
-		message.reply(`проверьте свои личные сообщения.`);
-	}
 	
 	if(command === "dimosha_chat") {
 		if(message.author.id !== '275249724251176961') return message.channel.send({embed: {
@@ -80,7 +73,7 @@ client.on('message', async message => {
             .setThumbnail(client.user.avatarURL);
             embed.addField('Пинг:', client.ping);
             embed.addField('ОЗУ:', process.env.WEB_MEMORY + 'MB / ' + process.env.MEMORY_AVAILABLE + 'MB');
-            embed.addField('Сервер:', process.env.DYNO);
+            embed.addField('Режим:', process.env.DYNO);
             embed.addField('Порт:', process.env.PORT);
             message.channel.send(embed);
 	}
@@ -239,7 +232,7 @@ if (err) return message.channel.send({embed: {
         value: "Забанить пользователя"
       },
       {
-        name: "!chgasschat [@упоминание] [причина]",
+        name: "!mute [@упоминание] [причина]",
         value: "Сменить доступ к чату для пользователя"
       }
     ]
@@ -283,7 +276,7 @@ if (err) return message.channel.send({embed: {
 });
 }
     
-    if(command === "chgasschat") {
+    if(command === "mute") {
 	    let err = false;
 ['MANAGE_MESSAGES'].forEach(function (item) {
             if (!message.member.hasPermission(item, false, true, true)) {
@@ -301,21 +294,27 @@ if (err) return message.channel.send({embed: {
   		if (!muteRole) return message.reply('Я не могу найти роль Muted').catch(console.error);
   		if (reason.length < 1) return message.reply('причина, -__-').catch(console.error);
   		if (message.mentions.users.size < 1) return message.reply('упоминание, -__-').catch(console.error);
-  		const embed = new Discord.RichEmbed()
+	    
+  		const muted = new Discord.RichEmbed()
     		.setColor(0x00AE86)
     		.setTimestamp()
-    		.setDescription(`**Действие:** Мут/Размут\n**Нарушитель:** ${member.user.tag}\n**Модератор:** ${message.author.tag}\n**Причина:** ${reason}`);
+    		.setDescription(`**Действие:** Мут\n**Нарушитель:** ${member.user.tag}\n**Модератор:** ${message.author.tag}\n**Причина:** ${reason}`);
+	    
+	    const unmuted = new Discord.RichEmbed()
+    		.setColor(0x00AE86)
+    		.setTimestamp()
+    		.setDescription(`**Действие:** Размут\n**Нарушитель:** ${member.user.tag}\n**Модератор:** ${message.author.tag}`);
 
   		if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply('У меня нету прав MANAGE_ROLES').catch(console.error);
 
   		if (member.roles.has(muteRole.id)) {
     		member.removeRole(muteRole).then(() => {
-      		message.channel.send({embed}).catch(console.error);
+      		message.channel.send({embed: unmuted}).catch(console.error);
     		})
     		.catch(e=>console.error("Невозможно размутить: " + e));
   		} else {
    	 		member.addRole(muteRole).then(() => {
-      		message.channel.send({embed}).catch(console.error);
+      		message.channel.send({embed: muted}).catch(console.error);
     		})
     		.catch(e=>console.error("Невозможно выдать мут: " + e));
   		}
@@ -357,3 +356,6 @@ if (err) return message.channel.send({embed: {
 });
 }
 });
+
+// И последний штрих. Подключение к аккаунту бота.
+client.login(token);
