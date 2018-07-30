@@ -13,15 +13,22 @@ client.on('guildMemberAdd', message => {
 
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
-    // Статус "не беспокоить"
-    client.user.setStatus('dnd');
     // Смотрит на Француза
 	client.user.setPresence({
-				game: {
-					name: `VimeWorld.ru`,
-					type: 1
-				}
-});
+      status: 'online', //статус вашего аккаунта (dnd, idle, invisible, online)
+      game: {
+        name: 'VimeWorld.ru', //название вашей игры
+        state: 'AquaLiquidUSER, ур. 100', //текст на 2 линии
+        details: 'Находится в Лобби', //текст на 1 линии
+        application_id: '455418297677250560', //id вашего приложения
+assets: { //ассесты
+          small_image: '', //id от маленько ассеста
+          small_text: '', //текст который будет виден при наведение на маленький ассест
+          large_image: 'vime', //id от большого ассеста
+          large_text: '' //текст который будет виден при наведение на большой ассест
+        }
+      }
+},);
     // Вывод текста "что бот готов" + токен бота в консоль
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
     console.log('Токен: ' + token)
