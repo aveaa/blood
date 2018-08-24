@@ -1,6 +1,8 @@
 // Запуск
 const Discord = require('discord.js');
+const vimeworld = require('vimelib');
 const client = new Discord.Client();
+const vime = new vimeworld(process.env.VIMETOKEN);
 
 // Подключаем токен и префикс
 var token = process.env.BOTTOKEN
@@ -41,14 +43,53 @@ client.on('message', async message => {
 	
     
     if(message.content === prefix + "help") {
-	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
-    	message.reply("вам доступны следующие команды:```fix\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
+	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    	message.reply("вам доступны следующие команды:```fix\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+	
+	if(command === "guild") {
+		const guildName = args.join(" ");
+	vime.getGuildByName(guildName).then((guild) => {
+    message.channel.send({embed: {
+		title: `Статистика гильдии ${guild.name}`,
+		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}`
+	}
+	});
+	});
+	}
+  
+  if(command === "user") {
+		const userName = args.join(" ");
+	vime.getUsersbyName(userName).then((result) => { 
+		var userID = result[0].id;
+		var userRank = result[0].rank;
+		var userN = result[0].username;
+    	var userLVL = result[0].level;
+	vime.getSession(userID).then((result) => { 
+    var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
+    message.channel.send({embed: {
+		title: `Статистика игрока ${userN}`,
+		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}`
+	}
+	});
+	});
+	});
+	}
+	
+	if(command === "online") {
+	vime.getOnline().then((online) => {
+    message.channel.send({embed: {
+		title: "Онлайн на сервере VimeWorld.ru Minigames:",
+		description: `Общий онлайн: ${online.total}\n\nОнлайн на Annihilation: ${online.separated.ann}\nОнлайн на BuildBattle: ${online.separated.bb}\nОнлайн на GunGame: ${online.separated.gg}\nОнлайн в Лобби: ${online.separated.lobby}\nОнлайн на SkyWars: ${online.separated.sw}\nОнлайн на BedWars: ${online.separated.bw}\nОнлайн на MobWars: ${online.separated.mw}\nОнлайн на KitPVP: ${online.separated.kpvp}\nОнлайн на DeathRun: ${online.separated.dr}\nОнлайн на BlockParty: ${online.separated.bp}\nОнлайн на HungerGames: ${online.separated.hg}`
+	}
+	});
+});
+	}
 	
 	if(command === "dimosha_chat") {
 		if(message.author.id !== '275249724251176961') return message.channel.send({embed: {
