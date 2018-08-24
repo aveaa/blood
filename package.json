@@ -1,14 +1,15 @@
 {
-  "name": "visual",
+  "name": "aqualiquid",
   "version": "1.0.0",
-  "description": "A just Discord bot. hehe",
+  "description": "A just Discord bot.",
   "main": "visual.js",
   "scripts": {
     "start": "node visual.js"
   },
   "dependencies": {
-    "discord.js": "^11.2.0"
+    "discord.js": "^11.4.2",
+    "vimelib": "^1.0.0"
   },
-  "author": "TheDipperProduction",
+  "author": "sqdEclipse",
   "license": "GPL-3.0"
 }
