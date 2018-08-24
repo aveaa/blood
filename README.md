@@ -2,5 +2,5 @@
 Бот выполнен под настройки Discord сервера, гильдии AquaLiquid на проекте VimeWorld.ru<br>
 <br>
 Используемые библиотеки:<br>
-- Discord.JS<br>
-- VimeLib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
+- Discord.JS | npm i --save discord.js | [https://github.com/discordjs/discord.js](https://github.com/discordjs/discord.js)<br>
+- VimeLib | npm i --save VimeLib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
