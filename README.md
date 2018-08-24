@@ -3,4 +3,4 @@
 <br>
 Используемые библиотеки:<br>
 - Discord.JS<br>
-- VimeLib ((https://github.com/asazs/VimeLib)[https://github.com/asazs/VimeLib])
+- VimeLib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
