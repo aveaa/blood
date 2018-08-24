@@ -20,7 +20,7 @@ client.on('ready', () => {
 // Сообщения
 client.on('message', async message => {
     if(message.content === prefix + "help") {
-    message.reply("вам доступны следующие команды:```fix\nИнфа о стримах: !streams\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    message.reply("вам доступны следующие команды:```fix\nИнфа о онлайне модеров: !staff\nИнфа о стримах: !streams\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
     }
 	
 	if(message.content === prefix + "info") {
@@ -31,6 +31,16 @@ client.on('message', async message => {
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+	
+	if(command === "staff") {
+vime.getStaff().then((player) => {
+    var owners = "Список модераторов онлайн: \n\n";
+    player.forEach((staff) => {
+        owners += `${vime.returnReadablePrefix(staff.rank)} ${staff.username} - ${staff.online.message}\n`
+    })
+    message.author.send(owners);
+})
+}
 	
 	if(command === "streams") {
   vime.getStreams().then((streams) => {
