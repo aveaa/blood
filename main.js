@@ -20,7 +20,11 @@ client.on('ready', () => {
 // Сообщения
 client.on('message', async message => {
     if(message.content === prefix + "help") {
-    message.reply("вам доступны следующие команды:```fix\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    message.reply("вам доступны следующие команды:```fix\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    }
+	
+	if(message.content === prefix + "info") {
+	  message.channel.send("Автор бота: (sqdEclipse#5372)[http://eclipsedev.cf/]\nИсходный код: [https://github.com/EclipseHub/andromeda](https://github.com/EclipseHub/andromeda)\nСсылка на приглашение бота: [https://ciphersky.page.link/bloodinv](https://ciphersky.page.link/bloodinv)");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
