@@ -3,4 +3,4 @@
 <br>
 Используемые библиотеки:<br>
 - Discord.JS | npm i --save discord.js | [https://github.com/discordjs/discord.js](https://github.com/discordjs/discord.js)<br>
-- VimeLib | npm i --save VimeLib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
+- VimeLib | npm i --save vimelib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
