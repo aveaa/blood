@@ -35,8 +35,8 @@ assets: { //ассесты
 client.on('message', async message => {
 	const ayy = client.emojis.find("name", "error");
     if(message.content === prefix + "help") {
-	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
-    	message.reply("вам доступны следующие команды:```fix\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
+	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nИнфа о стримах: !streams\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    	message.reply("вам доступны следующие команды:```fix\nИнфа о боте: !info\nИнфа о стримах: !streams\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
     }
 	
 	if(message.content === prefix + "info") {
