@@ -6,6 +6,7 @@ Discord бот для гильдии [AquaLiquid](https://vk.com/aqua.liquid) с
 - `!online` - Показывать кол-во онлайна на VimeWorld.ru.
 - `!user <nickname>` - Показывать информацию о игроке.
 - `!guild <guildname>` - Показывать информацию о гильдии.
+- `!streams` - Показывать информацию о стримах.
 - `!moderator` - Модерировать.
 
 ## Основные файлы репозитория
