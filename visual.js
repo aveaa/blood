@@ -48,6 +48,16 @@ client.on('message', async message => {
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 	
+	if(command === "streams") {
+  vime.getStreams().then((streams) => {
+    var owners = "Список активных стримов: \n\n";
+    streams.forEach((stream) => {
+        owners += stream.owner + " ведет прямую трансляцию: `" + stream.title + "`\nЗрителей: " + stream.viewers + "\n"
+    })
+    message.channel.send(owners);
+})
+}
+	
 	if(command === "guild") {
 		const guildName = args.join(" ");
 	vime.getGuildByName(guildName).then((guild) => {
