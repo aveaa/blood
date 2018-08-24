@@ -1,5 +1,6 @@
 # Blood
-Discord бот для гильдии [AquaLiquid](https://vk.com/aqua.liquid) с использованием API проекта [VimeWorld.ru](https://vimeworld.ru)
+- Discord бот для гильдии [AquaLiquid](https://vk.com/aqua.liquid) с использованием API проекта [VimeWorld.ru](https://vimeworld.ru)
+- Пригласить бота: [https://ciphersky.page.link/bloodinv](https://ciphersky.page.link/bloodinv)
 
 ## Умеет
 - `!joke` - Шутить шутки.
