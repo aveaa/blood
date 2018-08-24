@@ -8,11 +8,6 @@ const vime = new vimeworld(process.env.VIMETOKEN);
 var token = process.env.BOTTOKEN
 var prefix = '!';
 
-// Приветствуем людей
-client.on('guildMemberAdd', message => {
-	client.channels.get("435798157251706880").send(`Возьмите с собой <@${message.user.id}> на турнир`);
-});
-
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
     // Смотрит на Француза
@@ -38,13 +33,14 @@ assets: { //ассесты
 
 // Сообщения
 client.on('message', async message => {
-	
 	const ayy = client.emojis.find("name", "error");
-	
-    
     if(message.content === prefix + "help") {
-	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
-    	message.reply("вам доступны следующие команды:```fix\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
+	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    	message.reply("вам доступны следующие команды:```fix\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
+    }
+	
+	if(message.content === prefix + "info") {
+	  message.channel.send("Автор бота: (sqdEclipse#5372)[http://eclipsedev.cf/]\nИсходный код: [https://github.com/EclipseHub/andromeda](https://github.com/EclipseHub/andromeda)\nСсылка на приглашение бота: [https://ciphersky.page.link/bloodinv](https://ciphersky.page.link/bloodinv)");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
