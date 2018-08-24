@@ -1,6 +1,6 @@
-# visual
-Просто бот. хехе)
+# AquaLiquid
+Бот выполнен под настройки Discord сервера, гильдии AquaLiquid на проекте VimeWorld.ru<br>
 <br>
-===================
-<br>
-Бот выполнен под настройки Discord сервера, гильдии Andromeda на проекте VimeWorld
+Используемые библиотеки:<br>
+- Discord.JS<br>
+- VimeLib ((https://github.com/asazs/VimeLib)[https://github.com/asazs/VimeLib])
