@@ -16,13 +16,13 @@
 - `package.json` - Лучше не редачить.
 - `visual.js` и `Procfile` - Файлы для версии на собственном хостинге. Не будет работать (если вы не кодер).
 - `config.json` - Важная фигня для `main.js`
-- `install-1.cmd` (discord.js) и `install-2.cmd` (vimelib) - Установщики модулей.
+- `install.cmd` - Установщик модулей..
 
 ## Установка
 1. Отредактировать файл `config.json`
-2. Запустить сначала `install-1.cmd`, а затем `install-2.cmd`
-2. Запустить бота с помощью `start.cmd`
+2. Запустить `install.cmd`
+3. После закрытия `install.cmd`, запустите `start.cmd`
 
 ## Используемые библиотеки
-- Discord.JS | npm i --save discord.js | [https://github.com/discordjs/discord.js](https://github.com/discordjs/discord.js)
-- VimeLib | npm i --save vimelib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
+- Discord.JS | npm i discord.js | [https://github.com/discordjs/discord.js](https://github.com/discordjs/discord.js)
+- VimeLib | npm i vimelib | [https://github.com/asazs/VimeLib](https://github.com/asazs/VimeLib)
