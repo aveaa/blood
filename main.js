@@ -33,10 +33,10 @@ client.on('message', async message => {
   const command = args.shift().toLowerCase();
 	
 	if(command === "staff") {
-vime.getStaff().then((player) => {
+  vime.getStaff().then((player) => {
     var owners = "Список модераторов онлайн: \n\n";
     player.forEach((staff) => {
-        owners += `${vime.returnReadablePrefix(staff.rank)} ${staff.username} - ${staff.online.message}\n`
+        owners += `${staff.rank} ${staff.username} - ${staff.online.message}\n`
     })
     message.channel.send(owners);
 })
