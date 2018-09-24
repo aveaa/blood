@@ -38,7 +38,7 @@ vime.getStaff().then((player) => {
     player.forEach((staff) => {
         owners += `${vime.returnReadablePrefix(staff.rank)} ${staff.username} - ${staff.online.message}\n`
     })
-    message.author.send(owners);
+    message.channel.send(owners);
 })
 }
 	
