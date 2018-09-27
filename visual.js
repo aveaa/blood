@@ -19,12 +19,17 @@ client.on('ready', () => {
 client.on('message', async message => {
 	const ayy = client.emojis.find("name", "error");
     if(message.content === prefix + "help") {
-	    if(message.author.id !== '178404926869733376') return message.reply("вам доступны следующие команды:```fix\nИнфа о онлайне модеров: !staff\nИнфа о стримах: !streams\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
-    	message.reply("вам доступны следующие команды:```fix\nИнфа о онлайне модеров: !staff\nИнфа о боте: !info\nИнфа о стримах: !streams\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\nЭмулирование Javascript: !eval\n```");
+	    message.channel.send({embed: {
+  color: 3447003,
+  description: message.author + ", вам доступны следующие команды:```fix\nПроверить, есть ли `в сети` персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n\nФункционал будет пополняться.\n```"
+}});
     }
 	
 	if(message.content === prefix + "info") {
-	  message.channel.send("Автор бота: sqdEclipse#5372\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv");
+		message.channel.send({embed: {
+  color: 3447003,
+  description: "Автор бота: sqdEclipse#5372 (http://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv"
+}});
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
@@ -34,9 +39,9 @@ client.on('message', async message => {
 	
 	if(command === "staff") {
   vime.getStaff().then((player) => {
-    var owners = "Список модераторов онлайн: \n\n";
+    var owners = "Персонал сервера онлайн: \n\n";
     player.forEach((staff) => {
-        owners += `${staff.rank} ${staff.username} - ${staff.online.message}\n`
+        owners += `[${staff.rank}] ${staff.username} - ${staff.online.message}\n`
     })
     message.channel.send(owners);
 })
@@ -58,7 +63,7 @@ client.on('message', async message => {
 	vime.getGuildByName(guildName).then((guild) => {
     message.channel.send({embed: {
 		title: `Статистика гильдии ${guild.name}`,
-		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}`
+		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}\n\nФункционал будет пополняться.`
 	}
 	});
 	});
@@ -76,7 +81,7 @@ client.on('message', async message => {
     var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
     message.channel.send({embed: {
 		title: `Статистика игрока ${userN}`,
-		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}`
+		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`
 	}
 	});
 	});
@@ -93,37 +98,13 @@ client.on('message', async message => {
 });
 	}
 	
-	if(command === "dimosha_chat") {
-		if(message.author.id !== '275249724251176961') return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-		
-		const sayMessage = args.join(" ");
-		
-		client.channels.get("434650030771666945").send(sayMessage);
-	}
-	
-	if(command === "render_chat") {
-		if(message.author.id !== '240167492931158022') return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-		
-		const sayMessage = args.join(" ");
-		
-		client.channels.get("434650030771666945").send(sayMessage);
-	}
-	
 	if(command === "uptime") {
 		const embed = new Discord.RichEmbed()
             .setTitle('**Статистика:**')
             .setThumbnail(client.user.avatarURL);
             embed.addField('Пинг:', client.ping);
             embed.addField('ОЗУ:', process.env.WEB_MEMORY + 'MB / ' + process.env.MEMORY_AVAILABLE + 'MB');
-            embed.addField('Режим:', process.env.DYNO);
+            embed.addField('Процесс:', process.env.DYNO);
             embed.addField('Порт:', process.env.PORT);
             message.channel.send(embed);
 	}
@@ -258,154 +239,6 @@ client.on('message', async message => {
                 .setDescription('Если изображение не загружается, тыкните на него (либо перезагрузите клиент Discord)');
             message.channel.send({embed});
 }
-    
-    if(command === "moderator") {
-    let err = false;
-['MANAGE_MESSAGES'].forEach(function (item) {
-            if (!message.member.hasPermission(item, false, true, true)) {
-                err = true;
-            }
-        });
-if (err) return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-        message.author.send({embed: {
-    color: 2378990,
-    fields: [{
-        name: "!kick [@упоминание] [причина]",
-        value: "Кикнуть пользователя"
-      },
-      {
-        name: "!ban [@упоминание] [причина]",
-        value: "Забанить пользователя"
-      },
-      {
-        name: "!mute [@упоминание] [причина]",
-        value: "Сменить доступ к чату для пользователя"
-      }
-    ]
-  }
-});
-        message.reply(
-      'проверьте свои личные сообщения'
-    );
-}
- 
-  if(command === "kick") {
-    let err = false;
-['KICK_MEMBERS'].forEach(function (item) {
-            if (!message.member.hasPermission(item, false, true, true)) {
-                err = true;
-            }
-        });
-if (err) return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-    let member = message.mentions.members.first();
-    if(!member)
-      return message.reply("вы не сказали кого кикнуть");
-    if(!member.kickable) 
-      return message.reply("я не могу кикнуть его(её), у меня есть хоть права?");
-    let reason = args.slice(1).join(' ');
-    if(!reason)
-      return message.reply("а причину написать?");
-    await member.kick(reason)
-      .catch(error => message.channel.send('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>'));
-    message.channel.send({embed: {
-    color: 3447003,
-    fields: [{
-        name: "• = Команда выполнена = •",
-        value: `${member.user.tag} был кикнут по причине: "${reason}"`
-      }
-    ]
-  }
-});
-}
-    
-    if(command === "mute") {
-	    let err = false;
-['MANAGE_MESSAGES'].forEach(function (item) {
-            if (!message.member.hasPermission(item, false, true, true)) {
-                err = true;
-            }
-        });
-if (err) return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-		let reason = args.slice(1).join(' ');
-  		let member = message.mentions.members.first();
-  		let muteRole = message.guild.roles.find('name', 'Muted');;
-  		if (!muteRole) return message.reply('Я не могу найти роль Muted').catch(console.error);
-  		if (reason.length < 1) return message.reply('причина, -__-').catch(console.error);
-  		if (message.mentions.users.size < 1) return message.reply('упоминание, -__-').catch(console.error);
-	    
-  		const muted = new Discord.RichEmbed()
-    		.setColor(0x00AE86)
-    		.setTimestamp()
-    		.setDescription(`**Действие:** Мут\n**Нарушитель:** ${member.user.tag}\n**Модератор:** ${message.author.tag}\n**Причина:** ${reason}`);
-	    
-	    const unmuted = new Discord.RichEmbed()
-    		.setColor(0x00AE86)
-    		.setTimestamp()
-    		.setDescription(`**Действие:** Размут\n**Нарушитель:** ${member.user.tag}\n**Модератор:** ${message.author.tag}`);
-
-  		if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply('У меня нету прав MANAGE_ROLES').catch(console.error);
-
-  		if (member.roles.has(muteRole.id)) {
-    		member.removeRole(muteRole).then(() => {
-      		message.channel.send({embed: unmuted}).catch(console.error);
-    		})
-    		.catch(e=>console.error("Невозможно размутить: " + e));
-  		} else {
-   	 		member.addRole(muteRole).then(() => {
-      		message.channel.send({embed: muted}).catch(console.error);
-    		})
-    		.catch(e=>console.error("Невозможно выдать мут: " + e));
-  		}
-}
- 
-  if(command === "ban") {
-    let err = false;
-['BAN_MEMBERS'].forEach(function (item) {
-            if (!message.member.hasPermission(item, false, true, true)) {
-                err = true;
-            }
-        });
-if (err) return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-     
-    let member = message.mentions.members.first();
-    if(!member)
-      return message.reply("вы не сказали кого забанить");
-    if(!member.bannable) 
-      return message.reply("я не могу забанить его(её), у меня есть хоть права?");
- 
-    let reason = args.slice(1).join(' ');
-    if(!reason)
-      return message.reply("а причину написать?");
-     
-    await member.ban(reason)
-      .catch(error => message.channel.send('Команда не может быть выполнена\n\nЗа дополнительной информацией, писать этому ноунейму -> <@178404926869733376>'));
-    message.channel.send({embed: {
-    color: 3447003,
-    fields: [{
-        name: "• = Команда выполнена = •",
-        value: `${member.user.tag} был забанен по причине "${reason}"`
-      }
-    ]
-  }
-});
-}
-});
 
 // И последний штрих. Подключение к аккаунту бота.
 client.login(token);
