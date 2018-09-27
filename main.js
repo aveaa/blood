@@ -11,7 +11,6 @@ var prefix = '!';
 
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
-	client.user.setGame('VimeWorld.ru');
     // Вывод текста "что бот готов" + токен бота в консоль
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
     console.log('Токен: ' + token)
@@ -54,6 +53,7 @@ client.on('message', async message => {
 	
 	if(command === "guild") {
 		const guildName = args.join(" ");
+		if(!guildName) return message.reply(`Вы ввели неверное название гильдии\n\nПример: !guild AquaLiquid | !guild Fantastic Five | !guild VimeTop (ИМЯ, НО НЕ ТЭГ)`);
 	vime.getGuildByName(guildName).then((guild) => {
     message.channel.send({embed: {
 		title: `Статистика гильдии ${guild.name}`,
@@ -65,6 +65,7 @@ client.on('message', async message => {
   
   if(command === "user") {
 		const userName = args.join(" ");
+	  if(!userName) return message.reply(`Вы ввели неверный никнейм игрока\n\nПример: !user Vlad_Cyphersky | !user DimoshaTyan | !user LoganFrench`);
 	vime.getUsersbyName(userName).then((result) => { 
 		var userID = result[0].id;
 		var userRank = result[0].rank;
