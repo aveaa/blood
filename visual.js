@@ -10,22 +10,6 @@ var prefix = '!';
 
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
-    // Смотрит на Француза
-	client.user.setPresence({
-      status: 'online', //статус вашего аккаунта (dnd, idle, invisible, online)
-      game: {
-        name: 'VimeWorld.ru', //название вашей игры
-        state: 'AquaLiquidUSER, ур. 100', //текст на 2 линии
-        details: 'Находится в Лобби', //текст на 1 линии
-        application_id: '455418297677250560', //id вашего приложения
-assets: { //ассесты
-          small_image: '', //id от маленько ассеста
-          small_text: '', //текст который будет виден при наведение на маленький ассест
-          large_image: 'vime', //id от большого ассеста
-          large_text: '' //текст который будет виден при наведение на большой ассест
-        }
-      }
-},);
     // Вывод текста "что бот готов" + токен бота в консоль
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
     console.log('Токен: ' + token)
@@ -70,6 +54,7 @@ client.on('message', async message => {
 	
 	if(command === "guild") {
 		const guildName = args.join(" ");
+		if(!guildName) return message.reply(`Вы ввели неверное название гильдии\n\nПример: !guild AquaLiquid | !guild Fantastic Five | !guild VimeTop (ИМЯ, НО НЕ ТЭГ)`);
 	vime.getGuildByName(guildName).then((guild) => {
     message.channel.send({embed: {
 		title: `Статистика гильдии ${guild.name}`,
@@ -81,6 +66,7 @@ client.on('message', async message => {
   
   if(command === "user") {
 		const userName = args.join(" ");
+	  if(!userName) return message.reply(`Вы ввели неверный никнейм игрока\n\nПример: !user Vlad_Cyphersky | !user DimoshaTyan | !user LoganFrench`);
 	vime.getUsersbyName(userName).then((result) => { 
 		var userID = result[0].id;
 		var userRank = result[0].rank;
