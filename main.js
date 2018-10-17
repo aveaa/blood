@@ -76,7 +76,7 @@ client.on('message', async message => {
     message.channel.send({embed: {
 		title: `Статистика игрока ${userN}`,
 		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}`,
-	        image: `https://skin.vimeworld.ru/helm/${userName}.png`
+	        image: "https://skin.vimeworld.ru/helm/" + userN + ".png"
 	}
 	});
 	});
