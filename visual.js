@@ -81,7 +81,8 @@ client.on('message', async message => {
     var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
     message.channel.send({embed: {
 		title: `Статистика игрока ${userN}`,
-		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`
+		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`,
+	        image: `https://skin.vimeworld.ru/helm/${userName}.png`
 	}
 	});
 	});
