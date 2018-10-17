@@ -79,12 +79,11 @@ client.on('message', async message => {
     	var userLVL = result[0].level;
 	vime.getSession(userID).then((result) => { 
     var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
-    message.channel.send({embed: {
-		title: `Статистика игрока ${userN}`,
-		description: `ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`,
-	        image: "https://skin.vimeworld.ru/helm/" + userN + ".png"
-	}
-	});
+		const embedLOL = new Discord.RichEmbed()
+		.setTitle(`Статистика игрока ${userN}`)
+		.setDescription(`ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`)
+		.setImage("https://skin.vimeworld.ru/helm/" + userN + ".png");
+    message.channel.send(embedLOL);
 	});
 	});
 	}
