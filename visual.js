@@ -10,7 +10,7 @@ var prefix = '!';
 
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
-    // Вывод текста "что бот готов" + токен бота в консоль
+    client.user.setGame(`!help // !info`);
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
     console.log('Токен: ' + token)
 });
@@ -36,6 +36,44 @@ client.on('message', async message => {
    
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+	
+	if(command === "dev") {
+  if(message.author.id === "178404926869733376") {
+  if(!args[0] || args[0] === 'help') {
+    message.channel.send(`DeveloperTools - Набор небольших инструментов для разработчика. \n\nКоманды:\n**eval** - выполнить строчку кода \n**shutdown** - отключить бота \n**cinvite [ID]** - создать инвайт`)
+  }
+  if(args[0] === 'eval') {
+    try {
+    var code = args.slice(1).join(" ");
+    var evaled = eval(code);
+
+    if (typeof evaled !== "string")
+      evaled = require("util").inspect(evaled);
+
+    message.channel.sendCode("xl", clean(evaled));
+  } catch(err) {
+    message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+  }
+  }
+  if(args[0] === 'cinvite') {
+	let guild = client.guilds.get(args[1]);
+    let channels = guild.channels.filter(channel => channel.type === 'text' && channel.permissionsFor(guild.members.get(client.user.id)).has('SEND_MESSAGES'));
+	if (channels.size > 0) channels.first().createInvite().then(inv => message.channel.send(`https://discord.gg/${inv.code}`))
+  }
+    if(args[0] === 'shutdown') {
+      message.channel.send(":white_check_mark: Выполняю запрос..")
+      setTimeout(() => {
+        process.exit();
+}, 500)
+    }
+  } else {
+    message.channel.send({embed: {
+  color: 1111111,
+  title: "Ошибка:",
+  description: ayy + ` У вас нету прав для доступа к этой команде.`
+  }});
+  }
+}
 	
 	if(command === "staff") {
   vime.getStaff().then((player) => {
