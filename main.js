@@ -23,7 +23,7 @@ client.on('message', async message => {
     }
 	
 	if(message.content === prefix + "info") {
-	  message.channel.send("Автор бота: sqdEclipse#5372\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv");
+	  message.channel.send("Автор бота: vladciphersky#9142 (https://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv");
     }
     
     if(message.content.indexOf(prefix) !== 0) return;
