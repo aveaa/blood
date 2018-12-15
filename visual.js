@@ -28,7 +28,7 @@ client.on('message', async message => {
 	if(message.content === prefix + "info") {
 		message.channel.send({embed: {
   color: 3447003,
-  description: "Автор бота: sqdEclipse#5372 (http://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv"
+  description: "Автор бота: vladciphersky#9142 (https://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv"
 }});
     }
     
