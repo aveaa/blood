@@ -28,7 +28,7 @@ client.on('message', async message => {
 	if(message.content === prefix + "info") {
 		message.channel.send({embed: {
   color: 3447003,
-  description: "Автор бота: vladciphersky#9142 (https://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://ciphersky.page.link/bloodinv"
+  description: "Автор бота: vladciphersky#9142 (https://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://discordapp.com/api/oauth2/authorize?client_id=529414897973592096&permissions=8&scope=bot"
 }});
     }
     
