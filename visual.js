@@ -137,7 +137,7 @@ client.on('message', async message => {
     				});
     				message.channel.send(`Список друзей игрока ${userName}:\n${names}`);
 			})
-		}}
+		})
 	}
 	
 	if(command === "online") {
