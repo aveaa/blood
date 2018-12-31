@@ -19,7 +19,7 @@ client.on('ready', () => {
 // Сообщения
 client.on('message', async message => {
     if(message.content === prefix + "help") {
-    message.reply("вам доступны следующие команды:```fix\nИнфа о онлайне модеров: !staff\nИнфа о стримах: !streams\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
+    message.reply("вам доступны следующие команды:```fix\nСписок друзей игрока: !friends [никнейм]\nИнфа о онлайне модеров: !staff\nИнфа о стримах: !streams\nИнфа о боте: !info\nИнфа о игроке: !user [никнейм]\nИнфа о гильдии: !guild [имя]\nОнлайн на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\nКоманды модератора: !moderator\n```");
     }
 	
 	if(message.content === prefix + "info") {
