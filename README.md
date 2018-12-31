@@ -21,7 +21,7 @@
 ## Установка
 1. Отредактировать файл `config.json`
 2. Запустить `install.cmd`
-3. После закрытия `install.cmd`, запустите `start.cmd`
+3. После закрытия `install.cmd,` запустите `start.cmd`
 
 ## Используемые библиотеки
 - Discord.JS | npm i discord.js | [https://github.com/discordjs/discord.js](https://github.com/discordjs/discord.js)
