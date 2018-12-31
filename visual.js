@@ -28,7 +28,7 @@ client.on('message', async message => {
 	if(message.content === prefix + "info") {
 		message.channel.send({embed: {
   color: 3447003,
-  description: "Автор бота: vladciphersky#9142 (https://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/andromeda\nСсылка на приглашение бота: https://discordapp.com/api/oauth2/authorize?client_id=529414897973592096&permissions=8&scope=bot"
+  description: "Автор бота: ciphersky#0001 (https://vladciphersky.xyz)\nИсходный код: https://github.com/EclipseHub/blood\nСсылка на приглашение бота: https://discordapp.com/api/oauth2/authorize?client_id=529414897973592096&permissions=8&scope=bot"
 }});
     }
     
@@ -124,6 +124,20 @@ client.on('message', async message => {
     message.channel.send(embedLOL);
 	});
 	});
+	}
+	
+	if(command === "friends") {
+		const userName = args.join(" ");
+		vime.getUsersbyName(userName).then((result) => {
+    			var userID = result[0].id;
+			vime.getFriends(userID).then((result) => {
+    				var names = "";
+    				result.friends.forEach(friend => {
+    				    names += `${vime.returnReadable(friend.rank).prefix} ${friend.username}\n`
+    				});
+    				message.channel.send(`Список друзей игрока ${userName}:\n${names}`);
+			})
+		}}
 	}
 	
 	if(command === "online") {
