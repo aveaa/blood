@@ -32,7 +32,7 @@ client.on('message', async message => {
 			.addField(`VimeWorld API || Токен`, `Валидный | Аккаунт: Vlad_Cyphersky`)
 			.addField(`Discord API || Токен`, `Валидный | Аккаунт: ${client.user.tag}`)
 			.addField(`Используемые библиотеки`, "```\ndiscord.js\nvimelib\n```")
-			.addField(`Сервер тех. поддержки`, `https://discord.gg/cq9h2y3 || Обращаться к **sqdEclipse#0001**`);
+			.addField(`Сервер тех. поддержки`, `https://invite.gg/bloodproject`);
 		message.channel.send(infocmd);
     }
     
