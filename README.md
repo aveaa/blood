@@ -1,6 +1,7 @@
 # Информация
 - Blood Project. (или же Blood, Блуд) - Бот Discord, написанный на Фреймворке [NodeJS](https://nodejs.org) с использованием API проекта [VimeWorld.ru](https://vimeworld.ru).
-- Пригласить бота: [:thinking:](https://discordapp.com/api/oauth2/authorize?client_id=529414897973592096&permissions=8&scope=bot) <- Нажми :з
+- Пригласить бота: [https://discordapp.com/api/oauth2/authorize?client_id=529414897973592096&permissions=8&scope=bot](https://discordapp.com/api/oauth2/authorize?client_id=529414897973592096&permissions=8&scope=bot)
+- Тема на форуме: [https://forum.vimeworld.ru/topic/281793-blood-project/](https://forum.vimeworld.ru/topic/281793-blood-project/)
 
 ## Умеет
 - `!joke` - Шутить шутки.
