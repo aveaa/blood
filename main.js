@@ -23,15 +23,15 @@ client.on('message', async message => {
     }
 	
 	if(message.content === prefix + "info") {
-	  	let infocmd = new Discord.RichEmbed()
+		let infocmd = new Discord.RichEmbed()
 			.setAuthor("sqdEclipse", "https://vladciphersky.xyz/772f67653137238069b16b9f53fae468.png")
 			.setDescription("Информация о проекте Blood Project")
 			.addField(`VimeWorld API || Токен`, `Валидный | Аккаунт: Vlad_Cyphersky`)
 			.addField(`Discord API || Токен`, `Валидный | Аккаунт: ${client.user.tag}`)
 			.addField(`Используемые библиотеки`, "```\ndiscord.js\nvimelib\n```")
-			.addField(`Сервер тех. поддержки`, `https://discord.gg/cq9h2y3 || Обращаться к **sqdEclipse#0001**`);
+			.addField(`Сервер тех. поддержки`, `https://invite.gg/bloodproject`);
 		message.channel.send(infocmd);
-	}
+    }
     
     if(message.content.indexOf(prefix) !== 0) return;
    
