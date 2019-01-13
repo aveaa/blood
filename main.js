@@ -98,7 +98,10 @@ message.channel.send(embedLOL);
     				result.friends.forEach(friend => {
     				    names += `${vime.returnReadable(friend.rank).prefix} ${friend.username}\n`
     				});
-    				message.channel.send(`Список друзей игрока ${userName}:\n${names}`);
+    				message.channel.send(`Список друзей игрока ${userName}:\n${names}`).catch(err => {
+					let embed = new Discord.RichEmbed().setDescription(ayy + ` ` + err + `\n\nЗа описанием ошибки **обратиться к sqdEclipse#0001**`);
+					return message.reply(embed);
+				});
 			})
 		})
 	}
