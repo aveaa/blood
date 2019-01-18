@@ -59,15 +59,40 @@ client.on('message', async message => {
 }
 	
 	if(command === "guild") {
-		const guildName = args.join(" ");
-		if(!guildName) return message.reply(`Вы ввели неверное название гильдии\n\nПример: !guild AquaLiquid | !guild Fantastic Five | !guild VimeTop (ИМЯ, НО НЕ ТЭГ)`);
+		if(!args[0] || args[0] === "") return message.channel.send("Вы неправильно ввели команду.\nСинтаксис: !" + command + " <тип запроса(name/tag/id)> <имя/тэг/айди>");
+		if(args[0] === "name") {
+		const guildName = args.slice(1).join(" ");
+		if(!guildName) return message.reply(`Вы ввели неверное название гильдии\n\nПример: !guild name Fantastic Five | !guild name VimeTop`);
 	vime.getGuildByName(guildName).then((guild) => {
     message.channel.send({embed: {
 		title: `Статистика гильдии ${guild.name}`,
-		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}`
+		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}\n\nФункционал будет пополняться.`
 	}
 	});
 	});
+		}
+		if(args[0] === "tag") {
+		const guildName = args.slice(1).join(" ");
+		if(!guildName) return message.reply(`Вы ввели неверный тэг гильдии\n\nПример: !guild tag F5 | !guild tag VTop`);
+	vime.getGuildByTag(guildName).then((guild) => {
+    message.channel.send({embed: {
+		title: `Статистика гильдии ${guild.name}`,
+		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}\n\nФункционал будет пополняться.`
+	}
+	});
+	});
+		}
+		if(args[0] === "id") {
+		const guildName = args.slice(1).join(" ");
+		if(!guildName) return message.reply(`Вы ввели неверный ID гильдии\n\nПример: !guild id 1 | !guild id 104`);
+	vime.getGuildByID(guildName).then((guild) => {
+    message.channel.send({embed: {
+		title: `Статистика гильдии ${guild.name}`,
+		description: `ID: ${guild.id}\nТэг: ${guild.tag}\nУровень: ${guild.level}\nКол-во коинов, вложенных в казну: ${guild.totalCoins}\n\nФункционал будет пополняться.`
+	}
+	});
+	});
+		}
 	}
   
   if(command === "user") {
@@ -92,18 +117,22 @@ message.channel.send(embedLOL);
 	if(command === "friends") {
 		const userName = args.join(" ");
 		vime.getUsersbyName(userName).then((result) => {
-    			var userID = result[0].id;
-			vime.getFriends(userID).then((result) => {
-    				var names = "";
-    				result.friends.forEach(friend => {
-    				    names += `${vime.returnReadable(friend.rank).prefix} ${friend.username}\n`
-    				});
-    				message.channel.send(`Список друзей игрока ${userName}:\n${names}`).catch(err => {
-					let embed = new Discord.RichEmbed().setDescription(ayy + ` ` + err + `\n\nЗа описанием ошибки **обратиться к sqdEclipse#0001**`);
-					return message.reply(embed);
-				});
-			})
-		})
+            var id = result[0].id;
+            var nick = result[0].username;
+            var rank = result[0].rank;
+            vime.getFriends(id).then((result) => {
+                var friends_list = "";
+                result.friends.forEach(friend => {
+                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + "`\n";
+                });
+		    message.channel.send({embed: {
+		title: "Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`",
+		description: friends_list
+	}
+	});
+            })
+            
+        })
 	}
 	
 	if(command === "online") {
