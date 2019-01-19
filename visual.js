@@ -175,7 +175,7 @@ client.on('message', async message => {
 		    return message.channel.send(embed).catch(err => {
 					let embed = new Discord.RichEmbed().setDescription(ayy + ` ` + err + `\n\nЗа описанием ошибки, обратитесь на сервер тех. поддержки: **https://invite.gg/bloodproject**`);
 					return message.reply(embed);
-				});;
+				});
             })
             })
         })
