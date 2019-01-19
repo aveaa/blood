@@ -166,13 +166,16 @@ client.on('message', async message => {
             vime.getFriends(id).then((result) => {
                 var friends_list = "";
                 result.friends.forEach(friend => {
-                    friends_list += (".addField(`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + "`, status)";
+                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + " | ${status}`";
                 });
 		    let embed = new Discord.RichEmbed()
 		    .setTitle("Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`")
-		    friends_list
+		    .setDescription(friends_list);
 		    
-		    return message.channel.send(embed);
+		    return message.channel.send(embed).catch(err => {
+					let embed = new Discord.RichEmbed().setDescription(ayy + ` ` + err + `\n\nЗа описанием ошибки, обратитесь на сервер тех. поддержки: **https://invite.gg/bloodproject**`);
+					return message.reply(embed);
+				});;
             })
             })
         })
