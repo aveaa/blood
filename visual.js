@@ -158,21 +158,23 @@ client.on('message', async message => {
 	if(command === "friends") {
 		const userName = args.join(" ");
 		vime.getUsersbyName(userName).then((result) => {
-            var id = result[0].id;
+			var id = result[0].id;
             var nick = result[0].username;
             var rank = result[0].rank;
+		vime.getSession(id).then((result) => {
+    var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
             vime.getFriends(id).then((result) => {
                 var friends_list = "";
                 result.friends.forEach(friend => {
-                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + "`\n";
+                    friends_list += (".addField(`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + "`, status)";
                 });
-		    message.channel.send({embed: {
-		title: "Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`",
-		description: friends_list
-	}
-	});
+		    let embed = new Discord.RichEmbed()
+		    .setTitle("Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`")
+		    friends_list
+		    
+		    return message.channel.send(embed);
             })
-            
+            })
         })
 	}
 	
