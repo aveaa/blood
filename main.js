@@ -117,21 +117,23 @@ message.channel.send(embedLOL);
 	if(command === "friends") {
 		const userName = args.join(" ");
 		vime.getUsersbyName(userName).then((result) => {
-            var id = result[0].id;
+			var id = result[0].id;
             var nick = result[0].username;
             var rank = result[0].rank;
+		vime.getSession(id).then((result) => {
+    var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
             vime.getFriends(id).then((result) => {
                 var friends_list = "";
                 result.friends.forEach(friend => {
-                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + "`\n";
+                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + " | " + status + "`\n";
                 });
-		    message.channel.send({embed: {
-		title: "Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`",
-		description: friends_list
-	}
-	});
+		    
+		    return message.channel.send("Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`: \n\n" + friends_list).catch(err => {
+					let embed = new Discord.RichEmbed().setDescription(ayy + ` ` + err + `\n\nЗа описанием ошибки, обратитесь на сервер тех. поддержки: **https://invite.gg/bloodproject**`);
+					return message.reply(embed);
+				});
             })
-            
+            })
         })
 	}
 	
