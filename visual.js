@@ -168,11 +168,8 @@ client.on('message', async message => {
                 result.friends.forEach(friend => {
                     friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + " | ${status}`";
                 });
-		    let embed = new Discord.RichEmbed()
-		    .setTitle("Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`")
-		    .setDescription(friends_list);
 		    
-		    return message.channel.send(embed).catch(err => {
+		    return message.channel.send("Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`: \n\n" + friends_list).catch(err => {
 					let embed = new Discord.RichEmbed().setDescription(ayy + ` ` + err + `\n\nЗа описанием ошибки, обратитесь на сервер тех. поддержки: **https://invite.gg/bloodproject**`);
 					return message.reply(embed);
 				});
