@@ -106,7 +106,7 @@ client.on('message', async message => {
 	vime.getSession(userID).then((result) => { 
     var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
     const embedLOL = new Discord.RichEmbed()
-		.setTitle(`Статистика игрока ${userN}`)
+		.setTitle(`Статистика игрока ${vime.returnReadable(userRank).prefix} ${userN}`)
 		.setDescription(`ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`)
 		.setImage("https://skin.vimeworld.ru/helm/" + userN + ".png");
 message.channel.send(embedLOL);
