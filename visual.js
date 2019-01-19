@@ -166,7 +166,7 @@ client.on('message', async message => {
             vime.getFriends(id).then((result) => {
                 var friends_list = "";
                 result.friends.forEach(friend => {
-                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + " | ${status}`";
+                    friends_list += ("`LVL: " + friend.level + " " + vime.returnReadable(friend.rank).prefix + " " + friend.username) + " | ${status}`\n";
                 });
 		    
 		    return message.channel.send("Список друзей игрока `" + vime.returnReadable(rank).prefix + " " + nick + "`: \n\n" + friends_list).catch(err => {
