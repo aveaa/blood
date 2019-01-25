@@ -1,32 +1,38 @@
 // Запуск
+const config = require('./config.json');
 const Discord = require('discord.js');
 const vimeworld = require('vimelib');
 const client = new Discord.Client();
-const vime = new vimeworld(process.env.VIMETOKEN);
+const vime = new vimeworld(config.vimetoken || process.env.VIMETOKEN);
 
-// Подключаем токен и префикс
-var token = process.env.BOTTOKEN
+// Подключаем префикс
 var prefix = '!';
+
+// Вход
+client.login(config.discordtoken || process.env.BOTTOKEN);
 
 // Сообщение о готовности (вывод в консоль)
 client.on('ready', () => {
     client.user.setGame(`!help // !info`);
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
-    console.log('Токен: ' + token)
 });
 
 // Сообщения
 client.on('message', async message => {
 	const ayy = client.emojis.find("name", "error");
-    if(message.content === prefix + "help") {
-	    message.channel.send({embed: {
-  color: 3447003,
-  description: message.author + ', вам доступны следующие команды:```fix\nСписок друзей игрока: !friends [никнейм]\nПроверить, есть ли "в сети" персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n\nФункционал будет пополняться.\n```'
-}});
-    }
+	if(message.content.indexOf(prefix) !== 0) return;
+	const args = message.content.slice(prefix.length).trim().split(/ +/g);
+	const command = args.shift().toLowerCase();
 	
-	if(message.content === prefix + "info") {
-		let infocmd = new Discord.RichEmbed()
+	if(command === "help") {
+	    	message.channel.send({embed: {
+		  color: 3447003,
+		  description: message.author + ', вам доступны следующие команды:```fix\nВыдача роли по рангу: !!verify (Примечание: для использования данной команды, напишите !!createverifyroles 10-15 раз)\nСписок друзей игрока: !friends [никнейм]\nПроверить, есть ли "в сети" персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n```'
+		}});
+	}
+	
+	if(command === "info") {
+	    	let infocmd = new Discord.RichEmbed()
 			.setAuthor("sqdEclipse", "https://vladciphersky.xyz/772f67653137238069b16b9f53fae468.png")
 			.setDescription("Информация о проекте Blood Project")
 			.addField(`VimeWorld API || Токен`, `Валидный | Аккаунт: Vlad_Cyphersky`)
@@ -34,12 +40,7 @@ client.on('message', async message => {
 			.addField(`Используемые библиотеки`, "```\ndiscord.js\nvimelib\n```")
 			.addField(`Сервер тех. поддержки`, `https://invite.gg/bloodproject`);
 		message.channel.send(infocmd);
-    }
-    
-    if(message.content.indexOf(prefix) !== 0) return;
-   
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+	}
 	
 	if(command === "dev") {
   if(message.author.id === "178404926869733376") {
@@ -141,7 +142,7 @@ client.on('message', async message => {
 	  if(!userName) return message.reply(`Вы ввели неверный никнейм игрока\n\nПример: !user Vlad_Cyphersky | !user DimoshaTyan | !user LoganFrench`);
 	vime.getUsersbyName(userName).then((result) => { 
 		var userID = result[0].id;
-		var userRank = result[0].rank;
+		var userRank = vime.returnReadable(result[0].rank).prefix;
 		var userN = result[0].username;
     	var userLVL = result[0].level;
 	vime.getSession(userID).then((result) => { 
@@ -149,7 +150,7 @@ client.on('message', async message => {
     const embedLOL = new Discord.RichEmbed()
 		.setTitle(`Статистика игрока ${vime.returnReadable(userRank).prefix} ${userN}`)
 		.setDescription(`ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`)
-		.setImage("https://skin.vimeworld.ru/helm/" + userN + ".png");
+		.setThumbnail("https://skin.vimeworld.ru/helm/" + userN + ".png");
 message.channel.send(embedLOL);
 	});
 	});
@@ -198,25 +199,6 @@ message.channel.send(embedLOL);
             embed.addField('Порт:', process.env.PORT);
             message.channel.send(embed);
 	}
-	
-	if(command === "eval") {
-    if(message.author.id !== "178404926869733376") return message.channel.send({embed: {
-  color: 1111111,
-  title: "Ошибка:",
-  description: ayy + ` У вас нету прав для доступа к этой команде.\n\nЕсли вы считаете, что это не так, напишите <@178404926869733376>`
-}});
-    try {
-      var code = args.join(" ");
-      var evaled = eval(code);
-
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-
-      message.channel.sendCode("xl", clean(evaled));
-    } catch(err) {
-      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
-}
 	
 	if(command === "joke") {
   	let items = ['Падает комп с виндой с 16-го этажа и думает: Вот сейчас бы зависнуть',
@@ -330,5 +312,3 @@ message.channel.send(embedLOL);
             message.channel.send({embed});
 }
 });
-// И последний штрих. Подключение к аккаунту бота.
-client.login(token);
