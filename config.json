@@ -1,4 +1,4 @@
 {
-  "discordtoken": "token_bota",
-  "vimetoken": "api_token"
+  "discordtoken": "", // API токен Дискорда
+  "vimetoken": "" // API токен Вайма
 }
