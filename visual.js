@@ -142,8 +142,7 @@ client.on('message', async message => {
 	  if(!userName) return message.reply(`Вы ввели неверный никнейм игрока\n\nПример: !user Vlad_Cyphersky | !user DimoshaTyan | !user LoganFrench`);
 	vime.getUsersbyName(userName).then((result) => { 
 		var userID = result[0].id;
-		var rnk2 = result[0].rank;
-		var rnk = vime.returnReadable(rnk).rank;
+		var rnk = result[0].rank;
 		var userN = result[0].username;
     	var userLVL = result[0].level;
 	vime.getSession(userID).then((result) => { 
