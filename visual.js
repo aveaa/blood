@@ -142,14 +142,13 @@ client.on('message', async message => {
 	  if(!userName) return message.reply(`Вы ввели неверный никнейм игрока\n\nПример: !user Vlad_Cyphersky | !user DimoshaTyan | !user LoganFrench`);
 	vime.getUsersbyName(userName).then((result) => { 
 		var userID = result[0].id;
-		var userRank = vime.returnReadable(result[0].rank).prefix;
 		var userN = result[0].username;
     	var userLVL = result[0].level;
 	vime.getSession(userID).then((result) => { 
     var status = result.online.value ? "Онлайн | "+result.online.message : "Оффлайн";
     const embedLOL = new Discord.RichEmbed()
-		.setTitle(`Статистика игрока ${vime.returnReadable(userRank).prefix} ${userN}`)
-		.setDescription(`ID: ${userID}\nРанг: ${userRank}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`)
+		.setTitle(`Статистика игрока ${userN}`)
+		.setDescription(`ID: ${userID}\nРанг: ${vime.returnReadable(result[0].rank).prefix}\nУровень: ${userLVL}\nСтатус: ${status}\n\nФункционал будет пополняться.`)
 		.setThumbnail("https://skin.vimeworld.ru/helm/" + userN + ".png");
 message.channel.send(embedLOL);
 	});
