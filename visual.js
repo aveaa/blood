@@ -49,9 +49,12 @@ client.on('message', async message => {
 		if(!ur) return message.channel.send(`:x: || Вы не указали URL который надо сократить`);
 		
 		if(ur) {
-			self.shorturl(ur).then(res => {
-				if(res.code === "0") return message.channel.send(`:x: || Непредвиденная ошибка`);
-				message.channel.send(`:white_check_mark: || Ваша ссылка сокращена.\n:point_right: Ваша ссылка: ${res.msg}`);
+			self.shorturl(ur).then(r => {
+				if(r[0].code === "1") {
+					message.channel.send(`:white_check_mark: || Ваша ссылка сокращена.\n:point_right: Ваша ссылка: ${res.msg}`);
+				} else {
+					message.channel.send(`:x: || Непредвиденная ошибка`);
+				}
 			});
 		}
 	}
