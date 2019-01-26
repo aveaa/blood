@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "discord.js": "^11.4.2",
-    "vimelib": "^1.0.0"
+    "vimelib": "^1.0.0",
+    "request": "^2.88.1"
   },
   "author": "sqdEclipse",
   "license": "GPL-3.0"
