@@ -2,6 +2,8 @@
 const config = require('./config.json');
 const Discord = require('discord.js');
 const vimeworld = require('vimelib');
+const ciphersky = require('./ciphersky.js');
+const self = new ciphersky();
 const client = new Discord.Client();
 const vime = new vimeworld(config.vimetoken || process.env.VIMETOKEN);
 
@@ -27,7 +29,7 @@ client.on('message', async message => {
 	if(command === "help") {
 	    	message.channel.send({embed: {
 		  color: 3447003,
-		  description: message.author + ', вам доступны следующие команды:```fix\nВыдача роли по рангу: !!verify (Примечание: для использования данной команды, напишите !!createverifyroles 10-15 раз)\nСписок друзей игрока: !friends [никнейм]\nПроверить, есть ли "в сети" персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n```'
+		  description: message.author + ', вам доступны следующие команды:```fix\nСокращение ссылок: !shorturl\nВыдача роли по рангу: !!verify (Примечание: для использования данной команды, напишите !!createverifyroles 10-15 раз)\nСписок друзей игрока: !friends [никнейм]\nПроверить, есть ли "в сети" персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n```'
 		}});
 	}
 	
@@ -40,6 +42,17 @@ client.on('message', async message => {
 			.addField(`Используемые библиотеки`, "```\ndiscord.js\nvimelib\n```")
 			.addField(`Сервер тех. поддержки`, `https://invite.gg/bloodproject`);
 		message.channel.send(infocmd);
+	}
+	
+	if(command === "shorturl") {
+		let ur = args.join(" ");
+		if(!ur) return message.channel.send(`:x: || Вы не указали URL который надо сократить`);
+		
+		if(ur) {
+			self.shorturl(ur).then(res => {
+				message.channel.send(`:white_check_mark: || Ваша ссылка сокращена.\n:point_right: Ваша ссылка: ${res}`);
+			});
+		}
 	}
 	
 	if(command === "dev") {
