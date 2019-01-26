@@ -50,7 +50,8 @@ client.on('message', async message => {
 		
 		if(ur) {
 			self.shorturl(ur).then(res => {
-				message.channel.send(`:white_check_mark: || Ваша ссылка сокращена.\n:point_right: Ваша ссылка: ${res}`);
+				if(res.code === "0") return message.channel.send(`:x: || Непредвиденная ошибка`);
+				if(res.code === "1") return message.channel.send(`:white_check_mark: || Ваша ссылка сокращена.\n:point_right: Ваша ссылка: ${res.msg}`);
 			});
 		}
 	}
