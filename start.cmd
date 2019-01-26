@@ -1,2 +1,2 @@
-node main.js
+node visual.js
 pause
