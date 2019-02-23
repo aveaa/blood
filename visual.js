@@ -19,6 +19,15 @@ client.on('ready', () => {
     console.log('Ивент инициализирован. Подключён аккаунт ' + client.user.tag);
 });
 
+// Приход оповещения о добавлении/удалении бота
+client.on('guildCreate', (g) => {
+	client.channels.get("534042811503345695").send(`Новый сервер:\nИмя: ${g.name}\nID: ${g.id}`);
+});
+
+client.on('guildDelete', (g) => {
+	client.channels.get("534042811503345695").send(`Удаление с сервера:\nИмя: ${g.name}\nID: ${g.id}`);
+});
+
 // Сообщения
 client.on('message', async message => {
 	const ayy = client.emojis.find("name", "error");
