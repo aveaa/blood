@@ -46,11 +46,12 @@ client.on('message', async message => {
 	    	let infocmd = new Discord.RichEmbed()
 			.setAuthor("sqdEclipse", "https://vladciphersky.xyz/772f67653137238069b16b9f53fae468.png")
 			.setDescription("Информация о проекте Blood Project")
-			.addField(`VimeWorld API || Токен`, `Валидный | Аккаунт: Vlad_Cyphersky`)
-			.addField(`Discord API || Токен`, `Валидный | Аккаунт: ${client.user.tag}`)
+			.addField(`VimeWorld API || Токен`, `Валидный`)
+			.addField(`Discord API || Токен`, `Валидный`)
 			.addField(`Используемые библиотеки`, "```\ndiscord.js\nvimelib\n```")
 			.addField(`Сервер тех. поддержки`, `https://invite.gg/bloodproject`);
 		message.channel.send(infocmd);
+		message.reply(`поддержите бота репутацией на форуме: https://forum.vimeworld.ru/topic/281793-blood-project/`);
 	}
 	
 	if(command === "dev") {
