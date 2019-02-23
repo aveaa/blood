@@ -21,9 +21,7 @@ client.on('ready', () => {
 
 // Приход оповещения о добавлении/удалении бота
 client.on('guildCreate', (g) => {
-	let guild = client.guilds.get(args[1]);
-   	let channels = guild.channels.filter(channel => channel.type === 'text' && channel.permissionsFor(guild.members.get(client.user.id)).has('SEND_MESSAGES'));
-	if (channels.size > 0) channels.first().createInvite().then(inv => client.channels.get("534042811503345695").send(`Новый сервер:\nИмя: ${g.name}\nID: ${g.id}\nИнвайт: https://discord.gg/${inv.code}`));
+	client.channels.get("534042811503345695").send(`Новый сервер:\nИмя: ${g.name}\nID: ${g.id}`);
 });
 
 client.on('guildDelete', (g) => {
@@ -116,6 +114,7 @@ client.on('message', async message => {
 	if(command === "guild") {
 		if(!args[0] || args[0] === "") return message.channel.send("Вы неправильно ввели команду.\nСинтаксис: !" + command + " <тип запроса(name/tag/id)> <имя/тэг/айди>");
 		if(args[0] === "name") {
+			message.reply(`погоди. Если сообщение с инфой не пришло - значит гильдия отсутствует`);
 		const guildName = args.slice(1).join(" ");
 		if(!guildName) return message.reply(`Вы ввели неверное название гильдии\n\nПример: !guild name Fantastic Five | !guild name VimeTop`);
 	vime.getGuildByName(guildName).then((guild) => {
@@ -127,6 +126,7 @@ client.on('message', async message => {
 	});
 		}
 		if(args[0] === "tag") {
+			message.reply(`погоди. Если сообщение с инфой не пришло - значит гильдия отсутствует`);
 		const guildName = args.slice(1).join(" ");
 		if(!guildName) return message.reply(`Вы ввели неверный тэг гильдии\n\nПример: !guild tag F5 | !guild tag VTop`);
 	vime.getGuildByTag(guildName).then((guild) => {
@@ -138,6 +138,7 @@ client.on('message', async message => {
 	});
 		}
 		if(args[0] === "id") {
+			message.reply(`погоди. Если сообщение с инфой не пришло - значит гильдия отсутствует`);
 		const guildName = args.slice(1).join(" ");
 		if(!guildName) return message.reply(`Вы ввели неверный ID гильдии\n\nПример: !guild id 1 | !guild id 104`);
 	vime.getGuildByID(guildName).then((guild) => {
@@ -151,6 +152,7 @@ client.on('message', async message => {
 	}
   
   if(command === "user") {
+	  message.reply(`погоди. Если сообщение с инфой не пришло - значит юзер отсутствует`);
 		const userName = args.join(" ");
 	  if(!userName) return message.reply(`Вы ввели неверный никнейм игрока\n\nПример: !user Vlad_Cyphersky | !user DimoshaTyan | !user LoganFrench`);
 	vime.getUsersbyName(userName).then((result) => { 
