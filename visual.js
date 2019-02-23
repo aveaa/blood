@@ -21,7 +21,9 @@ client.on('ready', () => {
 
 // Приход оповещения о добавлении/удалении бота
 client.on('guildCreate', (g) => {
-	client.channels.get("534042811503345695").send(`Новый сервер:\nИмя: ${g.name}\nID: ${g.id}`);
+	let guild = client.guilds.get(args[1]);
+   	let channels = guild.channels.filter(channel => channel.type === 'text' && channel.permissionsFor(guild.members.get(client.user.id)).has('SEND_MESSAGES'));
+	if (channels.size > 0) channels.first().createInvite().then(inv => client.channels.get("534042811503345695").send(`Новый сервер:\nИмя: ${g.name}\nID: ${g.id}\nИнвайт: https://discord.gg/${inv.code}`));
 });
 
 client.on('guildDelete', (g) => {
