@@ -38,7 +38,7 @@ client.on('message', async message => {
 	if(command === "help") {
 	    	message.channel.send({embed: {
 		  color: 3447003,
-		  description: message.author + ', вам доступны следующие команды:```fix\nВыдача роли по рангу: !!verify (Примечание: для использования данной команды, напишите !!createverifyroles 10-15 раз)\nСписок друзей игрока: !friends [никнейм]\nПроверить, есть ли "в сети" персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n```'
+		  description: message.author + ', вам доступны следующие команды:```Список друзей игрока: !friends [никнейм]\nПроверить, есть ли "в сети" персонал проекта: !staff\nПроверка активных стримов на сервере: !streams\nИнформация о боте: !info\nИнформация об игроке: !user [никнейм]\nИнформация о гильдии: !guild [имя]\nПроверка онлайна на сервере: !online\nШутки: !joke\nАватарка: !avatar [упоминание]\n```'
 		}});
 	}
 	
@@ -46,7 +46,7 @@ client.on('message', async message => {
 	    	let infocmd = new Discord.RichEmbed()
 			.setAuthor("sqdEclipse", "https://vladciphersky.xyz/772f67653137238069b16b9f53fae468.png")
 			.setDescription("Информация о проекте Blood Project")
-			.addField(`VimeWorld API || Токен`, `Валидный`)
+			.addField(`VimeWorld API || Токен`, `Валидный (возможно)`)
 			.addField(`Discord API || Токен`, `Валидный`)
 			.addField(`Используемые библиотеки`, "```\ndiscord.js\nvimelib\n```")
 			.addField(`Сервер тех. поддержки`, `https://invite.gg/bloodproject`);
